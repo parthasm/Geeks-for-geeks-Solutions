@@ -12,7 +12,7 @@ class Node
     Node right;
 }
 
-public class Common
+public class InOrderIterative
 {
     //utiility funcitons begin
     private static Node formBSTBal(int[] ar, int sI, int endI)
@@ -32,7 +32,6 @@ public class Common
     
     private static Node createTreeBSTBal(int d)
     {
-        if(d<1)     return null;
         Node root = new Node();
         root.data = (int)Math.pow(2,d-1);
         int level = 1, loopI;
@@ -151,29 +150,53 @@ public class Common
     
     public static void main(String[] args)
     {
-        /*
-        int[][] ar = {{4,-2,-2,-2},
-                      {2,6,-2,-2},
-                      {1,3,5,7}};
-        Node root = getInput(ar);*/
-        Node root = createTreeBSTBal(8);
-        System.out.println("Pre order Traversal:");
-        printPreOrderTree(root);        
-        System.out.println();        
+        
+        int[][] ar = {{47,-2,-2,-2},
+                      {69,-2,-2,-2},
+                      {23,19,-2,-2},
+                      {22,-1,-1,56},
+                      {32,-1,-1,43},
+                      {12,-2,-2,-2}};                
+        Node root = getInput(ar);
+        
+       // Node root = createTreeBSTBal(1);
+       //int[] ar = {1};
+       //Node root = formBSTBal(ar,0,ar.length-1);
+        
+        
         
         System.out.println("In order Traversal:");
         printInOrderTree(root);        
         System.out.println();
-        
-        System.out.println("Post order Traversal:");
-        printPostOrderTree(root);        
-        System.out.println();        
-        
-        System.out.println("Level order Traversal:");
-        printLevelOrderTree(root);        
-        System.out.println();        
-        
+
+        System.out.println("In order Traversal:");
+        inOrdIter(root);        
+        System.out.println();
     }
     //utiility funcitons end
-    
+    private static void inOrdIter(Node root)
+    {
+        if(root == null)    return;
+        
+        LinkedList<Node> stack = new LinkedList<>();
+        
+        Node n = root;
+        
+        while(true)
+        {
+            if(n!=null)
+            {
+                stack.push(n);      n = n.left;
+            }
+            
+            else if(stack.size() > 0)
+            {
+                Node n1 = stack.pop();
+                System.out.print(n1.data+" ");  n = n1.right;
+            }
+            
+            else
+                break;
+        }
+    }
 }

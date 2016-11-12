@@ -12,7 +12,7 @@ class Node
     Node right;
 }
 
-public class Common
+public class PreOrderIterative
 {
     //utiility funcitons begin
     private static Node formBSTBal(int[] ar, int sI, int endI)
@@ -32,7 +32,6 @@ public class Common
     
     private static Node createTreeBSTBal(int d)
     {
-        if(d<1)     return null;
         Node root = new Node();
         root.data = (int)Math.pow(2,d-1);
         int level = 1, loopI;
@@ -151,29 +150,42 @@ public class Common
     
     public static void main(String[] args)
     {
-        /*
-        int[][] ar = {{4,-2,-2,-2},
-                      {2,6,-2,-2},
-                      {1,3,5,7}};
+        /*int[][] ar = {{61,-2,-2,-2,-2,-2,-2,-2},
+                      {21,6,-2,-2,-2,-2,-2,-2},
+                      {1,39,9,69,-2,-2,-2,-2},
+                      {-1,-1,29,2,-1,3,20,89}};
+
         Node root = getInput(ar);*/
-        Node root = createTreeBSTBal(8);
+        Node root = createTreeBSTBal(4);
+
+        
         System.out.println("Pre order Traversal:");
         printPreOrderTree(root);        
-        System.out.println();        
-        
-        System.out.println("In order Traversal:");
-        printInOrderTree(root);        
         System.out.println();
-        
-        System.out.println("Post order Traversal:");
-        printPostOrderTree(root);        
-        System.out.println();        
-        
-        System.out.println("Level order Traversal:");
-        printLevelOrderTree(root);        
-        System.out.println();        
-        
+
+        System.out.println("Pre order Traversal:");
+        printPreOrdIter(root);        
+        System.out.println();
     }
     //utiility funcitons end
-    
+    private static void printPreOrdIter(Node root)
+    {
+        if(root == null)    return;
+        
+        LinkedList<Node> stack = new LinkedList<>();
+        
+        stack.push(root);
+        
+        while(stack.size() > 0)
+        {
+            Node x = stack.pop();
+            System.out.print(x.data+" ");
+            
+            Node le = x.left;
+            Node ri = x.right;
+            
+            if(ri!=null)    stack.push(ri);
+            if(le!=null)    stack.push(le);
+        }
+    }
 }

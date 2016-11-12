@@ -12,7 +12,7 @@ class Node
     Node right;
 }
 
-public class Common
+public class SubTree
 {
     //utiility funcitons begin
     private static Node formBSTBal(int[] ar, int sI, int endI)
@@ -32,7 +32,6 @@ public class Common
     
     private static Node createTreeBSTBal(int d)
     {
-        if(d<1)     return null;
         Node root = new Node();
         root.data = (int)Math.pow(2,d-1);
         int level = 1, loopI;
@@ -156,7 +155,10 @@ public class Common
                       {2,6,-2,-2},
                       {1,3,5,7}};
         Node root = getInput(ar);*/
-        Node root = createTreeBSTBal(8);
+        int[] ar = {};
+        Node root1 = createTreeBSTBal(8);
+        Node root2 = formBSTBal(ar,0,ar.length-1);
+        /*
         System.out.println("Pre order Traversal:");
         printPreOrderTree(root);        
         System.out.println();        
@@ -168,12 +170,27 @@ public class Common
         System.out.println("Post order Traversal:");
         printPostOrderTree(root);        
         System.out.println();        
-        
+        */
         System.out.println("Level order Traversal:");
-        printLevelOrderTree(root);        
-        System.out.println();        
+        printLevelOrderTree(root2);        
+        System.out.println();  
+        
+        System.out.println(isSubTree(root1,root2,root2));
         
     }
     //utiility funcitons end
-    
+    private static boolean isSubTree(Node currN1, Node root2, Node currN2)
+    {
+        boolean ret = false;
+        
+        if(currN2 == null)      return true;
+        if(currN1 == null)      return false;
+        
+        if(currN1.data == currN2.data)
+            ret = isSubTree(currN1.left, root2, currN2.left) && isSubTree(currN1.right, root2, currN2.right);
+        
+        if(ret)     return ret;
+        
+        return isSubTree(currN1.left, root2, root2)  ||  isSubTree(currN1.right, root2, root2);
+    }
 }

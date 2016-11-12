@@ -1,3 +1,15 @@
+/*
+
+        5
+      /   \
+     2     6
+          /  \              ==>   5 2 45 21
+         45   34
+             /  \
+            21    56
+            
+
+*/
 import java.io.*;
 import java.util.*;
 import java.text.*;
@@ -12,7 +24,7 @@ class Node
     Node right;
 }
 
-public class Common
+public class LeftView
 {
     //utiility funcitons begin
     private static Node formBSTBal(int[] ar, int sI, int endI)
@@ -32,7 +44,6 @@ public class Common
     
     private static Node createTreeBSTBal(int d)
     {
-        if(d<1)     return null;
         Node root = new Node();
         root.data = (int)Math.pow(2,d-1);
         int level = 1, loopI;
@@ -152,11 +163,13 @@ public class Common
     public static void main(String[] args)
     {
         /*
-        int[][] ar = {{4,-2,-2,-2},
-                      {2,6,-2,-2},
-                      {1,3,5,7}};
+        int[][] ar = {{45,-2},
+                      {-1,67},
+                      {21,55},
+                      {2,-2}};
         Node root = getInput(ar);*/
-        Node root = createTreeBSTBal(8);
+        int[] ar = {23};
+        Node root = formBSTBal(ar,0,ar.length-1);
         System.out.println("Pre order Traversal:");
         printPreOrderTree(root);        
         System.out.println();        
@@ -171,9 +184,33 @@ public class Common
         
         System.out.println("Level order Traversal:");
         printLevelOrderTree(root);        
-        System.out.println();        
+        System.out.println();
+        
+        leftViewBT(root);
         
     }
     //utiility funcitons end
-    
+    private static void leftViewBT(Node root)
+    {
+        if(root == null)    return;
+        
+        int i;
+        List<Node> cNs = new ArrayList<>();     List<Node> nxtNs = new ArrayList<>();
+        Node n = null;
+        
+        cNs.add(root);
+        
+        while(cNs.size() > 0)
+        {
+            for( i = 0; i < cNs.size(); ++i)
+            {
+                n = cNs.get(i);
+                
+                if(n.left != null)  nxtNs.add(n.left);
+                if(n.right != null)  nxtNs.add(n.right);
+            }
+            System.out.print(cNs.get(0).data+" ");
+            cNs = nxtNs;    nxtNs = new ArrayList<>();
+        }
+    }
 }

@@ -12,7 +12,7 @@ class Node
     Node right;
 }
 
-public class Common
+public class FloorBST
 {
     //utiility funcitons begin
     private static Node formBSTBal(int[] ar, int sI, int endI)
@@ -32,7 +32,6 @@ public class Common
     
     private static Node createTreeBSTBal(int d)
     {
-        if(d<1)     return null;
         Node root = new Node();
         root.data = (int)Math.pow(2,d-1);
         int level = 1, loopI;
@@ -156,24 +155,39 @@ public class Common
                       {2,6,-2,-2},
                       {1,3,5,7}};
         Node root = getInput(ar);*/
-        Node root = createTreeBSTBal(8);
-        System.out.println("Pre order Traversal:");
-        printPreOrderTree(root);        
-        System.out.println();        
-        
-        System.out.println("In order Traversal:");
-        printInOrderTree(root);        
-        System.out.println();
-        
-        System.out.println("Post order Traversal:");
-        printPostOrderTree(root);        
-        System.out.println();        
-        
-        System.out.println("Level order Traversal:");
-        printLevelOrderTree(root);        
-        System.out.println();        
+        int num = 5;
+        Node root = createTreeBSTBal(num);
+
+        for(int loopI = 0; loopI <= (int)Math.pow(2,num)+1; ++loopI)
+        {
+            int currFl = -1;
+            System.out.println(floorFromBST(root,currFl,loopI)+" "+loopI);
+        }
         
     }
     //utiility funcitons end
-    
+    private static int floorFromBST(Node root, int currFl, int data)
+    {
+        if(root  == null)
+            return currFl;
+        
+        if(data < root.data)
+            return floorFromBST(root.left,currFl,data);
+        else if(data == root.data)
+        {
+            Node x = root.left;
+            if(x!=null)
+            {
+                while(x.right!=null)
+                    x = x.right;
+                return x.data;                
+            }
+            else
+                return currFl;
+        }
+
+        if(currFl < root.data)
+            currFl = root.data;
+        return floorFromBST(root.right,currFl,data);
+    }
 }

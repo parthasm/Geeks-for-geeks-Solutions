@@ -12,7 +12,7 @@ class Node
     Node right;
 }
 
-public class Common
+public class PostOrderIterative
 {
     //utiility funcitons begin
     private static Node formBSTBal(int[] ar, int sI, int endI)
@@ -32,7 +32,6 @@ public class Common
     
     private static Node createTreeBSTBal(int d)
     {
-        if(d<1)     return null;
         Node root = new Node();
         root.data = (int)Math.pow(2,d-1);
         int level = 1, loopI;
@@ -151,29 +150,82 @@ public class Common
     
     public static void main(String[] args)
     {
-        /*
-        int[][] ar = {{4,-2,-2,-2},
-                      {2,6,-2,-2},
-                      {1,3,5,7}};
+        /*int[][] ar = {{61,-2,-2,-2,-2,-2,-2,-2},
+                      {21,6,-2,-2,-2,-2,-2,-2},
+                      {1,39,9,69,-2,-2,-2,-2},
+                      {-1,-1,29,2,-1,3,20,89}};
+
         Node root = getInput(ar);*/
-        Node root = createTreeBSTBal(8);
-        System.out.println("Pre order Traversal:");
-        printPreOrderTree(root);        
-        System.out.println();        
-        
-        System.out.println("In order Traversal:");
-        printInOrderTree(root);        
-        System.out.println();
+        //Node root = createTreeBSTBal(4);
+        int[] ar = {2};
+        Node root = formBSTBal(ar,0,ar.length-1);
+
         
         System.out.println("Post order Traversal:");
-        printPostOrderTree(root);        
-        System.out.println();        
-        
-        System.out.println("Level order Traversal:");
-        printLevelOrderTree(root);        
-        System.out.println();        
-        
+        printPostOrdIterSet(root);        
+        System.out.println();
+
+        System.out.println("Post order Traversal:");
+        printPostOrdIterSingleDS(root);        
+        System.out.println();
     }
     //utiility funcitons end
+    private static void printPostOrdIterSet(Node root)
+    {
+        if(root == null)    return;
+        
+        LinkedList<Node> stack = new LinkedList<>();
+        Set<Integer> gotThis = new HashSet<>();
+        stack.push(root);
+        int ctr = -1;
+        
+        while(stack.size() > 0)
+        {
+            ctr = 0;
+            Node n = stack.peekFirst();
+            
+            if(n.right!=null && !gotThis.contains(n.right.data))
+            {
+                ++ctr;      stack.push(n.right);        gotThis.add(n.right.data);
+            }
+            
+            if(n.left!=null && !gotThis.contains(n.left.data))
+            {
+                ++ctr;      stack.push(n.left);        gotThis.add(n.left.data);
+            }            
+            
+            if(ctr == 0)
+            {
+                n = stack.pop();    System.out.print(n.data+" ");
+            }
+        }
+    }
     
+    private static void printPostOrdIterSingleDS(Node root)
+    {
+        if(root == null)    return;
+        LinkedList<Node> st = new LinkedList<>();
+        
+        while(true)
+        {
+            while(root!=null)
+            {
+                if(root.right!=null)    st.push(root.right);
+                
+                st.push(root);      root = root.left;
+            }
+            if(st.size() == 0)  break;
+            
+            Node n = st.pop();
+            
+            if(n.right != null && n.right == st.peekFirst())
+            {
+                root = st.pop();    st.push(n);
+            }
+            else
+            {
+                System.out.print(n.data+" ");  
+            }
+        }
+    }
 }

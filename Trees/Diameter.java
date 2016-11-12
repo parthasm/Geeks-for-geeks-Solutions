@@ -1,3 +1,10 @@
+/*
+Question: Find the diameter of a binary tree
+Note: It is the number of nodes on its longest path between 2 nodes
+Algorithm: It is the Maximum of diameter of left subtree , diameter of right sub tree & <sum of heights of 2 sub trees(add 3) 
+height is returned 1 less by each sub tree so add 2 & since it is number of nodes so it is 1 more than number of edges>
+*/
+
 import java.io.*;
 import java.util.*;
 import java.text.*;
@@ -12,7 +19,7 @@ class Node
     Node right;
 }
 
-public class Common
+public class Diameter
 {
     //utiility funcitons begin
     private static Node formBSTBal(int[] ar, int sI, int endI)
@@ -151,12 +158,17 @@ public class Common
     
     public static void main(String[] args)
     {
-        /*
-        int[][] ar = {{4,-2,-2,-2},
-                      {2,6,-2,-2},
-                      {1,3,5,7}};
+        
+        /*int[][] ar = {{6,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2},
+                      {7,12,-2,-2,-2,-2,-2,-2,-2,-2,-2},
+                      {73,21,-2,-2,-2,-2,-2,-2,-2,-2,-2},
+                      {39,2,-1,46,-2,-2,-2,-2,-2,-2,-2},
+                      {47,48,49,50,61,-2,-2,-2,-2,-2,-2},
+                      {63,101,107,8,-1,5,-1,4,-1,3,-2}};
         Node root = getInput(ar);*/
-        Node root = createTreeBSTBal(8);
+        
+        Node root = createTreeBSTBal(3);
+        /*
         System.out.println("Pre order Traversal:");
         printPreOrderTree(root);        
         System.out.println();        
@@ -172,8 +184,31 @@ public class Common
         System.out.println("Level order Traversal:");
         printLevelOrderTree(root);        
         System.out.println();        
+        */
+        System.out.println(findDiam(root));
         
     }
     //utiility funcitons end
     
+    private static int findDiam(Node root)
+    {
+        if(root == null)    return 0;
+        
+        int diamLeft = findDiam(root.left);
+        int diamRight = findDiam(root.right);
+        
+        int m = Math.max(diamLeft,diamRight);
+        
+        return Math.max(m, findDepth(root.left)+findDepth(root.right)+3);
+    }
+    
+    private static int findDepth(Node root)
+    {
+        if(root == null)    return -1;
+        
+        int dLeft = findDepth(root.left);
+        int dRight = findDepth(root.right);
+        
+        return 1+Math.max(dLeft,dRight) ;
+    }
 }

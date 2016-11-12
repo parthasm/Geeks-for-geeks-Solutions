@@ -12,7 +12,7 @@ class Node
     Node right;
 }
 
-public class Common
+public class CeilBST
 {
     //utiility funcitons begin
     private static Node formBSTBal(int[] ar, int sI, int endI)
@@ -32,7 +32,6 @@ public class Common
     
     private static Node createTreeBSTBal(int d)
     {
-        if(d<1)     return null;
         Node root = new Node();
         root.data = (int)Math.pow(2,d-1);
         int level = 1, loopI;
@@ -156,24 +155,36 @@ public class Common
                       {2,6,-2,-2},
                       {1,3,5,7}};
         Node root = getInput(ar);*/
-        Node root = createTreeBSTBal(8);
-        System.out.println("Pre order Traversal:");
-        printPreOrderTree(root);        
-        System.out.println();        
-        
-        System.out.println("In order Traversal:");
-        printInOrderTree(root);        
-        System.out.println();
-        
-        System.out.println("Post order Traversal:");
-        printPostOrderTree(root);        
-        System.out.println();        
-        
-        System.out.println("Level order Traversal:");
-        printLevelOrderTree(root);        
-        System.out.println();        
-        
+        int num = 3;
+        Node root = createTreeBSTBal(num);
+        for(int loopI = 0; loopI <= (int)Math.pow(2,num)+1; ++loopI)
+        {
+            int currCeil = 100000000;
+            System.out.println(ceilFromBST(root,currCeil,loopI)+" "+loopI);
+        }
+                
     }
     //utiility funcitons end
-    
+    private static int ceilFromBST(Node root, int currCeil,int data)   
+    {
+        if(root == null)    return currCeil;
+        
+        if(data < root.data)
+        {
+            if(currCeil > root.data)    currCeil = root.data;
+            return ceilFromBST(root.left,currCeil,data);
+        }            
+        else if(root.data == data)
+        {
+            Node x = root.right;
+            if(x!=null)
+            {
+                while(x.left!=null)     x = x.left;    
+                return x.data;
+            }
+            else    return currCeil;
+        }
+        
+        return ceilFromBST(root.right,currCeil,data);
+    }
 }
