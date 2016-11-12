@@ -1,0 +1,89 @@
+Multi Level Linked lists
+##1        Node head = new Node(); head.data = 5;
+        Node n1 = new Node();   n1.data = 10;    head.next = n1;
+        Node n2 = new Node();   n2.data = 19;    n1.next = n2;
+        Node n3 = new Node();   n3.data = 28;    n2.next = n3;
+       
+        Node n4 = new Node();   n4.data = 7;    head.down = n4;
+        Node n5 = new Node();   n5.data = 8;    n4.down = n5;
+        Node n6 = new Node();   n6.data = 30;    n5.down = n6;
+        
+        Node n7 = new Node();   n7.data = 20;    n1.down = n7;
+        
+        Node n8 = new Node();   n8.data = 22;    n2.down = n8;
+        Node n9 = new Node();   n9.data = 50;    n8.down = n9;
+        
+        Node n10 = new Node();   n10.data = 35;    n3.down = n10;
+        Node n11 = new Node();   n11.data = 40;    n10.down = n11;
+        Node n12 = new Node();   n12.data = 45;    n11.down = n12;
+        
+##2
+        Node head = new Node(); head.data = 5;
+        Node n1 = new Node();   n1.data = 10;    head.next = n1;
+        Node n2 = new Node();   n2.data = 19;    n1.next = n2;
+        Node n3 = new Node();   n3.data = 28;    n2.next = n3;
+       
+        Node n4 = new Node();   n4.data = 7;    head.down = n4;
+        Node n5 = new Node();   n5.data = 8;    n4.down = n5;
+        Node n6 = new Node();   n6.data = 30;    n5.down = n6;
+        
+##3
+        Node head = new Node(); head.data = 5;
+        Node n1 = new Node();   n1.data = 10;    head.next = n1;
+        Node n2 = new Node();   n2.data = 19;    n1.next = n2;
+        Node n3 = new Node();   n3.data = 28;    n2.next = n3;
+        
+        Node n10 = new Node();   n10.data = 35;    n3.down = n10;
+        Node n11 = new Node();   n11.data = 40;    n10.down = n11;
+        Node n12 = new Node();   n12.data = 45;    n11.down = n12;
+        
+        
+##4
+        Node head = new Node(); head.data = 10;
+        Node n1 = new Node();   n1.data = 5;    head.next = n1;
+        Node n2 = new Node();   n2.data = 12;    n1.next = n2;
+        Node n3 = new Node();   n3.data = 7;    n2.next = n3;
+        Node n4 = new Node();   n4.data = 11;    n3.next = n4;        
+        
+        Node n5 = new Node();   n5.data = 4;    head.down = n5;
+        Node n6 = new Node();   n6.data = 20;    n5.next = n6;
+        Node n7 = new Node();   n7.data = 13;    n6.next = n7;
+        
+        Node n8 = new Node();   n8.data = 2;    n6.down = n8;
+        Node n9 = new Node();   n9.data = 16;    n7.down = n9;
+        Node n10 = new Node();   n10.data = 3;    n9.down = n10;
+        
+        Node n11 = new Node();   n11.data = 17;    n3.down = n11;
+        Node n12 = new Node();   n12.data = 6;    n11.next = n12;
+        
+        Node n13 = new Node();   n13.data = 9;    n11.down = n13;
+        Node n14 = new Node();   n14.data = 8;    n13.next = n14;
+        
+        Node n15 = new Node();   n15.data = 19;    n13.down = n15;
+        Node n16 = new Node();   n16.data = 15;    n15.next = n16;
+        
+##5
+        Node n1 = new Node();  n1.data = 1;
+        Node n2 = new Node();    n2.data = 2;   n1.next = n2;
+        Node n3 = new Node();    n3.data = 3;   n2.next = n3;
+        Node n4 = new Node();    n4.data = 4;   n3.next = n4;
+        
+        Node n7 = new Node();    n7.data = 7;   n2.down = n7;
+        Node n8 = new Node();    n8.data = 8;   n7.next = n8;
+        Node n10 = new Node();   n10.data = 10; n8.next = n10;
+        Node n12 = new Node();   n12.data = 12; n10.next = n12;
+        
+        Node n9 = new Node();   n9.data = 9;    n7.down = n9;
+        Node n14 = new Node();  n14.data = 14; n9.down = n14;
+        Node n15 = new Node();  n15.data = 15; n14.down = n15;
+        Node n23 = new Node(); n23.data = 23;  n15.next = n23;
+        Node n24 = new Node(); n24.data = 24;   n23.down = n24;
+        
+        Node n16 = new Node(); n16.data = 16; n8.down = n16;
+        Node n17 = new Node(); n17.data = 17;   n16.down = n17;
+        Node n18 = new Node(); n18.data = 18;   n17.next = n18;
+        Node n19 = new Node(); n19.data = 19;   n18.next = n19;
+        Node n20 = new Node(); n20.data = 20;   n19.next = n20;
+        Node n21 = new Node(); n21.data = 21;   n20.down = n21;
+        
+        Node n11 = new Node(); n11.data = 11;   n10.down = n11;
