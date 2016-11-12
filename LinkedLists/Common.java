@@ -4,7 +4,7 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-public class Add2Nums
+public class Common
 {
     //utiility funcitons begin
     private static Node getInput(int[] inp)
